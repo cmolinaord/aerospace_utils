@@ -21,7 +21,6 @@
 # p0 = pressure at sea level in Pa
 
 import numpy as np
-from sys import argv
 
 ##########################################
 # Objects
@@ -32,6 +31,11 @@ class gas_state(object):
 		self.T = T
 		self.p = p
 		self.rho = rho
+
+##########################################
+# Variables
+
+layer_name = ["Tropsosphere","Tropopause","Stratosphere","Stratosphere","Stratopause","Mesosphere","Mesosphere"]
 
 ##########################################
 # Functions
