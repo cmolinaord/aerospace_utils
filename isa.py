@@ -21,6 +21,7 @@
 # p0 = pressure at sea level in Pa
 
 import numpy as np
+import units as u
 
 ##########################################
 # Objects
@@ -40,12 +41,6 @@ layer_name = ["Tropsosphere","Tropopause","Stratosphere","Stratosphere","Stratop
 ##########################################
 # Functions
 
-def kelvin(T_c):
-	return T_c + 273.15
-
-def centigrade(T_k):
-	return T_k - 273.15
-
 def isa_calc(h):
 	if h < 0:
 		print("Please give an altitude above the sea level (h>0)")
@@ -58,7 +53,7 @@ def isa_calc(h):
 	layer_base  = np.array([0,11000,20000,32000,47000,51000,71000])
 	layer_thick = np.diff(layer_base)
 
-	T0 = kelvin(19.0)
+	T0 = u.kelvin(19.0)
 	p0 = 108900.0
 
 	atm = gas_state
