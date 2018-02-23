@@ -16,7 +16,7 @@ elif len(argv) > 2:
 h = int(argv[1])
 atm, layer = isa.isa_calc(h)
 
-print("At",h,"you are in the",isa.layer_name[layer - 1])
+print("At",h,"m you are in the",isa.layer_name[layer - 1])
 print("  Temperature: ", np.round(atm.T,2),"K =",np.round(u.centigrade(atm.T),2),"degree Celsius")
 print("  Pressure: ", np.round(atm.p,2), "Pa")
 print("  Density: ", np.round(atm.rho,5), "kg/m^3")
