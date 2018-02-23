@@ -82,25 +82,3 @@ def isa_calc(h):
 	atm.rho = atm.p / R / atm.T
 
 	return atm, layer
-
-##########################################
-# Main
-
-if len(argv) < 2:
-	print(" ")
-	print("Please give me the altitude in meters to calculate the results")
-	exit()
-elif len(argv) > 2:
-	print(" ")
-	print("More than one parameter received:")
-	print("Please give me only one parameter, the altitude in meters")
-	exit()
-
-h = int(argv[1])
-atm, layer = isa_calc(h)
-name = ["Tropsosphere","Tropopause","Stratosphere","Stratosphere","Stratopause","Mesosphere","Mesosphere"]
-
-print("At",h,"you are in the",name[layer - 1])
-print("  Temperature: ", np.round(atm.T,2),"K =",np.round(centigrade(atm.T),2),"degree Celsius")
-print("  Pressure: ", np.round(atm.p,2), "Pa")
-print("  Density: ", np.round(atm.rho,5), "kg/m^3")
