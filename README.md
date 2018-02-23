@@ -26,3 +26,17 @@ where:
   - gas_state.rho = density in Kg/m<sup>3</sup>
 - layer = the number of the layer at given altitude
 - altitude: in meters above sea level
+
+### isa_print.py
+This functions is a simple way to print the results of isa_calc to screen in a command line
+
+Usage: python isa_print.py <altitude_in_meters>
+
+Example:
+```
+python isa_print.py 9000
+At 9000 you are in the Tropsosphere
+  Temperature:  233.65 K = -39.5 degree Celsius
+  Pressure:  33630.13 Pa
+  Density:  0.50151 kg/m^3
+```
