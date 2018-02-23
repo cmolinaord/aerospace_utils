@@ -29,6 +29,13 @@ def kelvin(T_c):
 def centigrade(T_k):
 	return T_k - 273.15
 
+class gas_state(object):
+	__slots__ = ["T","p","rho"]
+	def __init__(self, T, p, rho):
+		self.T = T
+		self.p = p
+		self.rho = rho
+
 ##########################################
 
 if len(argv) < 2:
@@ -59,8 +66,10 @@ layer_thick = np.diff(layer_base)
 
 T0 = kelvin(19.0)
 p0 = 108900.0
-T1 = T0
-p1 = p0
+
+atm = gas_state
+atm.T = T0
+atm.p = p0
 
 layer = 0
 #h0 = layer_base[layer]
@@ -68,21 +77,21 @@ h1 = h
 
 while h >= layer_base[layer]:
 	h1 = np.min([h1,layer_thick[layer]])
-	T1 = T0 + 0.001 * a[layer] * h1
+	T1 = atm.T + 0.001 * a[layer] * h1
 	if a[layer] == 0:
-		p1 = p0 * np.exp(-1 * g / R / T1 * h1)
+		p1 = atm.p * np.exp(-1 * g / R / atm.T * h1)
 	else:
-		p1 = p0 * np.power(T1 / T0, -1000 * g / a[layer] / R)
+		p1 = atm.p * np.power(T1 / T0, -1000 * g / a[layer] / R)
 
-	T0 = T1
-	p0 = p1
+	atm.T = T1
+	atm.p = p1
 	h1 = h1 - layer_thick[layer]
 	layer += 1
 
 # Density calculated with Gas equation
-rho = p1 / R / T1
+atm.rho = atm.p / R / atm.T
 
 print("You are in the",name[layer - 1])
-print("  Temperature: ", np.round(T1,2),"K =",np.round(centigrade(T1),2),"degree Celsius")
-print("  Pressure: ", np.round(p1,2), "Pa")
-print("  Density: ", np.round(rho,5), "kg/m^3")
+print("  Temperature: ", np.round(atm.T,2),"K =",np.round(centigrade(atm.T),2),"degree Celsius")
+print("  Pressure: ", np.round(atm.p,2), "Pa")
+print("  Density: ", np.round(atm.rho,5), "kg/m^3")
