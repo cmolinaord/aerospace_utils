@@ -49,7 +49,7 @@ def isa_calc(h):
 	R = 287.0
 	g = 9.81
 
-	a = np.array([-6.5,0.0,1.0,2,8,0.0,-2.8,-2.0])
+	a = np.array([-6.5,0.0,1.0,2.8,0.0,-2.8,-2.0])
 	layer_base  = np.array([0,11000,20000,32000,47000,51000,71000])
 	layer_thick = np.diff(layer_base)
 
@@ -57,26 +57,30 @@ def isa_calc(h):
 	p0 = 108900.0
 
 	atm = gas_state
-	atm.T = T0
-	atm.p = p0
 
 	layer = 0
-	#h0 = layer_base[layer]
 	h1 = h
 
 	while h >= layer_base[layer]:
-		h1 = np.min([h1,layer_thick[layer]])
-		T1 = atm.T + 0.001 * a[layer] * h1
-		if a[layer] == 0:
-			p1 = atm.p * np.exp(-1 * g / R / atm.T * h1)
+		h0 = layer_base[layer]
+		if h1 >= layer_thick[layer]:
+			dh = layer_thick[layer]
+			h1 = h1 - layer_thick[layer]
 		else:
-			p1 = atm.p * np.power(T1 / T0, -1000 * g / a[layer] / R)
+			dh = h1
 
-		atm.T = T1
-		atm.p = p1
-		h1 = h1 - layer_thick[layer]
+		T1 = T0 + 0.001 * a[layer] * dh
+		if a[layer] == 0:
+			p1 = p0 * np.exp(-1 * g / R / T0 * dh)
+		else:
+			p1 = p0 * np.power(T1 / T0, -1000 * g / a[layer] / R)
+
+		T0 = T1
+		p0 = p1
 		layer += 1
 
+	atm.T = T1
+	atm.p = p1
 	# Density calculated with Gas equation
 	atm.rho = atm.p / R / atm.T
 
