@@ -40,3 +40,7 @@ At 9000 you are in the Tropsosphere
   Pressure:  33630.13 Pa
   Density:  0.50151 kg/m^3
 ```
+
+### isa_plot.py
+This function creates a plot for different thermodynamical parameters as a function of
+the altitude for a given range.
