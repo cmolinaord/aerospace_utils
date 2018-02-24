@@ -22,6 +22,7 @@
 
 import numpy as np
 import units as u
+import const
 
 ##########################################
 # Objects
@@ -46,14 +47,11 @@ def isa_calc(h):
 		print("Please give an altitude above the sea level (h>0)")
 		exit()
 
-	R = 287.0
-	g = 9.81
-
 	a = np.array([-6.5,0.0,1.0,2.8,0.0,-2.8,-2.0])
 	layer_base  = np.array([0,11000,20000,32000,47000,51000,71000])
 	layer_thick = np.diff(layer_base)
 
-	T0 = u.kelvin(19.0)
+	T0 = u.temp.c2k(19.0)
 	p0 = 108900.0
 
 	atm = gas_state
@@ -71,9 +69,9 @@ def isa_calc(h):
 
 		T1 = T0 + 0.001 * a[layer] * dh
 		if a[layer] == 0:
-			p1 = p0 * np.exp(-1 * g / R / T0 * dh)
+			p1 = p0 * np.exp(-1 * const.g / const.R_air / T0 * dh)
 		else:
-			p1 = p0 * np.power(T1 / T0, -1000 * g / a[layer] / R)
+			p1 = p0 * np.power(T1 / T0, -1000 * const.g / a[layer] / const.R_air)
 
 		T0 = T1
 		p0 = p1
@@ -82,6 +80,6 @@ def isa_calc(h):
 	atm.T = T1
 	atm.p = p1
 	# Density calculated with Gas equation
-	atm.rho = atm.p / R / atm.T
+	atm.rho = atm.p / const.R_air / atm.T
 
 	return atm, layer
