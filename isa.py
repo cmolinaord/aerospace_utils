@@ -45,7 +45,7 @@ layer_name = ["Tropsosphere","Tropopause","Stratosphere","Stratosphere","Stratop
 ##########################################
 # Functions
 
-def isa_calc(h):
+def atm_calc(h):
 	if h < 0:
 		print("Please give an altitude above the sea level (h>0)")
 		exit()
@@ -81,7 +81,7 @@ def isa_calc(h):
 		p0 = p1
 		layer += 1
 
-	atm.layer = layer
+	atm.layer = layer - 1
 	atm.T = T1
 	atm.p = p1
 	# Density calculated with Gas equation

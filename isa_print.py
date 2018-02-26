@@ -14,7 +14,7 @@ elif len(argv) > 2:
 	exit()
 
 h = int(argv[1])
-atm, layer = isa.isa_calc(h)
+atm, layer = isa.atm_calc(h)
 
 print("At",h,"m you are in the",isa.layer_name[layer - 1])
 print("  Temperature: ", np.round(atm.T,2),"K =",np.round(u.temp.k2c(atm.T),2),"degree Celsius")
