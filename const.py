@@ -14,3 +14,9 @@ R_air = 287.058 # J kg-1 K-1
 N_A = 6.02214e23 # mol-1
 # Kelvin Temperature
 T_K = 273.15 # K
+# Mean temperature at sea level
+T_0 = 288.15 # K
+# Air density at sea level
+rho_0 = 1.225 # Kg * m-3
+#Ratio specific heat cp/cv of Air
+gamma_air = 1.4

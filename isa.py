@@ -33,6 +33,7 @@ class gas_state(object):
 		self.T = T
 		self.p = p
 		self.rho = rho
+		self.sound_speed = sound_speed
 
 ##########################################
 # Variables
@@ -51,8 +52,8 @@ def isa_calc(h):
 	layer_base  = np.array([0,11000,20000,32000,47000,51000,71000])
 	layer_thick = np.diff(layer_base)
 
-	T0 = u.temp.c2k(19.0)
-	p0 = 108900.0
+	T0 = const.T_0
+	p0 = 101325.0
 
 	atm = gas_state
 
@@ -81,5 +82,6 @@ def isa_calc(h):
 	atm.p = p1
 	# Density calculated with Gas equation
 	atm.rho = atm.p / const.R_air / atm.T
+	atm.sound_speed = np.sqrt(const.gamma_air * const.R_air * T1)
 
 	return atm, layer
