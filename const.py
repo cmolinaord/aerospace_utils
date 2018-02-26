@@ -16,6 +16,8 @@ N_A = 6.02214e23 # mol-1
 T_K = 273.15 # K
 # Mean temperature at sea level
 T_0 = 288.15 # K
+# Air pressure at sea level
+p_0 = 101325 # Pa
 # Air density at sea level
 rho_0 = 1.225 # Kg * m-3
 #Ratio specific heat cp/cv of Air
