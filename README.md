@@ -44,3 +44,11 @@ At 9000 you are in the Tropsosphere
 ### isa_plot.py
 This function creates a plot for different thermodynamical parameters as a function of
 the altitude for a given range.
+
+For a range between 0 to 68000 m the plot will look like:
+```
+from isa_plot import isa_plot as plt
+plt(h=0,h=68000,N=100)
+```
+![image](./images/isa_temp_pressure.png)
+
