@@ -89,3 +89,17 @@ def atm_calc(h):
 	atm.sound_speed = np.sqrt(const.gamma_air * const.R_air * T1)
 
 	return atm
+
+def eas(tas, atm):
+	if atm != gas_state:
+		print("atm must be an object of class 'isa.gas_state'")
+		return
+
+	return tas * np.sqrt(atm.rho / const.rho_0)
+
+def tas(eas, atm):
+	if atm != gas_state:
+		print("atm must be an object of class 'isa.gas_state'")
+		return
+		
+	return eas * np.sqrt(const.rho_0 / atm.rho)
