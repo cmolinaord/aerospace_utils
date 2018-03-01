@@ -11,7 +11,7 @@ def isa_plot(h0 = 0, h1 = 68000, N=100):
 	rho = np.zeros(N)
 
 	for i in range(N):
-		a,b = isa.atm_calc(h[i])
+		a = isa.atm_calc(h[i])
 		T[i] = u.temp.k2c(a.T)
 		p[i] = a.p
 		rho[i] = a.rho
